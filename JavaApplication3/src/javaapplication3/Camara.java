@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static javaapplication3.JavaApplication3.convertidor;
 import javax.imageio.ImageIO;
 
 /**
@@ -23,7 +22,6 @@ import javax.imageio.ImageIO;
 
 public class Camara {
     
-    public static String PICTUREFILENAME = "picam_";
     static Runtime rt = Runtime.getRuntime();
     static int increment;
     public static String fileName;
@@ -40,13 +38,14 @@ public class Camara {
     {
        try {   
             System.out.println("tomando foto");
-                    fileName = "/var/www/" + PICTUREFILENAME + increment++ + ".jpg";
+                    fileName = "/var/www/imagen" +  (increment++) + ".jpg";
                     Process p = rt.exec("raspistill -t 8000 -o " + fileName);
                     p.waitFor();
                     Analizar();
           } catch (Exception e) {
                         System.out.println("Exception:" + e.getMessage());
-                    }            
+                        
+          }            
     }
     
     public void Analizar()
@@ -61,7 +60,24 @@ public class Camara {
             System.out.println("Testing convertTo2DWithoutUsingGetRGB:");
 
             result = convertTo2DUsingGetRGB(hugeImage);
-      
+            System.out.println(result.length+", "+result[0].length);
+            
+            
+            
+            int regionder = convertidor.getWidth()/3;
+            int regioncent=convertidor.getWidth()/2;
+            
+            
+            for (int i = 0; i < regionder; i++) {
+                for (int j = 0; j < convertidor.getHeight(); j++) {
+                    
+                    
+                }
+            }
+            
+            
+           
+            
         } catch (IOException ex) {
             Logger.getLogger(Camara.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -80,16 +96,20 @@ public class Camara {
    private  int[][] convertTo2DUsingGetRGB(BufferedImage image) {
       int width = image.getWidth();
       int height = image.getHeight();
-      int[][] result = new int[height][width];
-
-      for (int row = 0; row < height; row++) {
-         for (int col = 0; col < width; col++) {
-             
-            result[row][col] = convertidor.getRGB(col, row);
-           
+      
+      
+            
+      int[][] result = new int[width][height];
+      
+      for (int col = 0; col < width; col++) {
+            
+          for (int row = 0; row < height; row++) {
+            result[col][row] = convertidor.getRGB(col,row);
          }
       }
       return result;
    }
+   
+   
 
 }

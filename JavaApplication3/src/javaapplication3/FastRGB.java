@@ -30,7 +30,7 @@ public class FastRGB
 
     int getRGB(int x, int y)
     {
-        int pos = (y * pixelLength * width) + (x * pixelLength);
+        int pos = (y * pixelLength * getWidth()) + (x * pixelLength);
 
         int argb = -16777216; // 255 alpha
         if (hasAlphaChannel)
@@ -42,5 +42,19 @@ public class FastRGB
         argb += (((int) pixels[pos++] & 0xff) << 8); // green
         argb += (((int) pixels[pos++] & 0xff) << 16); // red
         return argb;
+    }
+
+    /**
+     * @return the width
+     */
+    public int getWidth() {
+        return width;
+    }
+
+    /**
+     * @return the height
+     */
+    public int getHeight() {
+        return height;
     }
 }

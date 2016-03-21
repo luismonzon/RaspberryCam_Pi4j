@@ -48,9 +48,12 @@ static FastRGB convertidor;
       
     }
   */
-    public static void main(String[] args) throws IOException {
-
-      
+    public static void main(String[] args)  {
+            
+           Camara nueva = new Camara();
+           nueva.fileName="C:\\Users\\lmonzon\\Documents\\cam.jpg";
+           nueva.Analizar();
+           
    }
     
    
